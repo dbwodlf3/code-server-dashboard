@@ -1,0 +1,12 @@
+# Node
+node_modules
+# Python
+__pycache__
+*.pyc
+# Docker
+data
+# Outs
+user.js
+user.css
+typedocs
+docs

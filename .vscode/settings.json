@@ -1,0 +1,36 @@
+{
+	"typescript.format.enable": true,
+	"typescript.format.insertSpaceAfterCommaDelimiter": true,
+	"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"typescript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+	"typescript.format.placeOpenBraceOnNewLineForFunctions": false,
+	"python.analysis.extraPaths": [
+		"${workspaceFolder}/script"
+	],
+	"editor.rulers": [
+		80, 120
+	],
+	"[typescript]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+	},
+	"[javascript]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true
+	},
+	"[python]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+	},
+	"[html]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.detectIndentation": false
+	},
+	"[njk]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.detectIndentation": false		
+	},
+	"search.useGlobalIgnoreFiles": true
+}
