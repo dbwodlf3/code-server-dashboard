@@ -1,0 +1,22 @@
+use code;
+
+CREATE TABLE User(
+	`id` BIGINT(24) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	`type`   TINYINT UNSIGNED, /* if 123, then it is admin. */
+	`joinDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`activation` BOOLEAN NOT NULL DEFAULT 0, /* have to be changed to status. */
+	`username` VARCHAR(24) UNIQUE NOT NULL,
+	`password` VARCHAR(64) NOT NULL,
+	`userEmail` VARCHAR(64) UNIQUE NOT NULL,
+	`phone` VARCHAR(64) NOT NULL
+) ENGINE = InnoDB;
+
+CREATE TABLE Workspace(
+	`id` BIGINT(24) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	`createDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`userId` BIGINT(24) UNSIGNED,
+
+	CONSTRAINT `FK_Workspace_User`
+		FOREIGN KEY(`userId`) REFERENCES User(`id`)
+	ON DELETE CASCADE
+) ENGINE = InnoDB;

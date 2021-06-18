@@ -4,12 +4,19 @@
  import path from 'path';
 
  const projectDir = (()=>{
-     return path.join(__dirname, "..", "..", "..")
+     return path.join(__dirname, "..", "..", "..", "..")
  })();
  
  const staticDir = path.join(projectDir, "static")
+
+ const shaKey = 'flying cat'
  
  export default { 
      projectDir: projectDir,
-     staticDir: staticDir
+     staticDir: staticDir,
+     shaKey: shaKey,
+     dbHost: 'localhost',
+     dbUser: 'root',
+     dbPasswd: 'root',
+     dbDatabase: 'code'
  }
