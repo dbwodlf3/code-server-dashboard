@@ -31,3 +31,11 @@ services:
       - db
     environment:
       PMA_HOST: db
+
+  cs:
+    build:
+      context: ./cs
+    volumes:
+      - ./cs/init:/cs-init.d
+      - ./cs/init.py:/init.py
+    entrypoint: 'python3 /init.py &&'

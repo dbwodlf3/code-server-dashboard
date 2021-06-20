@@ -1,46 +1,34 @@
 /** Return HTML Page relative paths of auth.
  */
 
-import passport from "passport";
-import { ControlFunction, ControlResult, Middleware } from "lib/interface";
-import { checkUser } from "lib/auth";
-import { defaultErrorHandler } from "lib/error_handler";
+import { ControlFunction, ControlResult } from "lib/interface";
+import { generatePassword } from "lib/auth";
+import db from "lib/db";
 
- export const login: Middleware = function(req, res, next) {
+export const createUser: ControlFunction = function(req, res) {
     
     const response_msg: ControlResult = {
         "fail": false,
         "msg": ""
     }
 
-    const user_id = req.body['userName'];
+    const username = req.body['userName'];    
+    const user_email = req.body['userEmail'];
     const user_pw = req.body['userPasswd'];
 
-    passport.authenticate('local', (err, user, info)=>{        
-        checkUser(user_id, user_pw)
-        .then( (user)=>{
-            // Here User serialzed
-            req.login(user, (err)=>{
-                if(err) {
-                    response_msg.fail = true;
-                    response_msg.msg = err;
-                } else {
-                    response_msg.msg = "succed to login"
-                    return res.json(response_msg);
-                }
-            });
-        })
-        .catch( (err)=>{
-            // Failed to login    
-            if(err == false ) {
-                response_msg.msg = 'Failed to Login. check tour id and password.'
-            } else {
-                defaultErrorHandler(err, response_msg);
-            }
-            res.json(response_msg);
-        });
-        
-    })(req, res, next);
+    let query = `INSERT INTO User (username, userEmail, password, type, activation, phone)
+                    VALUES(${db.escape(username)},
+                        ${db.escape(user_email)},
+                        ${db.escape(generatePassword(user_pw))},
+                        '0',
+                        '1',
+                        '000-000-0000')`;
+
+    db.query(query).catch((err)=>{
+        console.log(err);
+    });
+
+    res.redirect('/admin/user/dashboard');
     
     return response_msg;
 }

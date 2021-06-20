@@ -1,46 +1,55 @@
 /** Return HTML Page relative paths of auth.
  */
 
-import passport from "passport";
-import { ControlFunction, ControlResult, Middleware } from "lib/interface";
-import { checkUser } from "lib/auth";
+import { ControlFunction, ControlResult} from "lib/interface";
+import { checkUser, generatePassword } from "lib/auth";
 import { defaultErrorHandler } from "lib/error_handler";
+import db from "lib/db";
 
- export const login: Middleware = function(req, res, next) {
+import * as exec from 'child_process';
+
+export const createContainer: ControlFunction = function(req, res) {
     
     const response_msg: ControlResult = {
         "fail": false,
         "msg": ""
     }
+    const name = req.body['name'];    
+    const passwd = req.body['passwd'];
+    const publishedPort = req.body['port'];
 
-    const user_id = req.body['userName'];
-    const user_pw = req.body['userPasswd'];
+    let query = `INSERT INTO Workspace (userId, name, password, publishedPort)
+                    VALUES(1,
+                            ${db.escape(name)},
+                            ${db.escape(generatePassword(passwd))},
+                            ${publishedPort}
+                            )`;
 
-    passport.authenticate('local', (err, user, info)=>{        
-        checkUser(user_id, user_pw)
-        .then( (user)=>{
-            // Here User serialzed
-            req.login(user, (err)=>{
-                if(err) {
-                    response_msg.fail = true;
-                    response_msg.msg = err;
-                } else {
-                    response_msg.msg = "succed to login"
-                    return res.json(response_msg);
-                }
-            });
-        })
-        .catch( (err)=>{
-            // Failed to login    
-            if(err == false ) {
-                response_msg.msg = 'Failed to Login. check tour id and password.'
-            } else {
-                defaultErrorHandler(err, response_msg);
-            }
-            res.json(response_msg);
-        });
+    db.query(query).then((result)=>{
+        const insertedId = result['insertId'];
         
-    })(req, res, next);
+        /** Create Code Server and Update. */
+        let command = `docker service create --name ${name} --publish published=${publishedPort},target=8080 -d docker_cs`
+        exec.exec(command, (err, stdout, stderr)=>{
+
+            // get id
+            let command = `docker service ls -f name=${name} | grep -w ${name} | awk '{print $1; exit}'`
+            exec.exec(command, (err, stdout, stderr)=>{
+                const serviceId = stdout;
+
+                let query = `UPDATE SET serviceId=${serviceId} WHERE id=${insertedId}`;
+                db.query(query);
+            })
+        })
+
+    })
+    .catch((err)=>{
+        console.log(err);
+    });
+
+    res.redirect('/admin/user/dashboard');
     
     return response_msg;
 }
+
+// Helper

@@ -162,10 +162,12 @@ var menu = new Menu("#myMenu");
 var item1 = new Item("fi-list", "5CD1FF");
 var item2 = new Item("fi-torso", "#FF5C5C", "/user/profile");
 var item3 = new Item("fab fa-docker", "#5CD1FF", "/user/container");
+var item4 = new Item("fas fa-sign-out-alt", "#5CD1FF", "/auth/logout");
 
 menu.add(item1);
 menu.add(item2);
 menu.add(item3);
+menu.add(item4);
 
 $(document).delay(50).queue(function(next) {
     menu.open();

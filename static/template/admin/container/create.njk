@@ -1,0 +1,20 @@
+{# @url admin/user/create.njk #}
+
+<html>
+<body>
+	{% include "common/global_nav.njk" %}
+	<div class="signup-container">
+		<div class="container">
+			<h1>Create Container</h1>
+			<form method="post" action="/admin/container/create">
+				<label>Container Name</label><br>
+				<input type="text" name="name"><br>
+				<label>Password</label><br>
+				<input type="password" name="passwd"><br>
+
+				<button>Create Container</button>
+			</form>
+		</div>     
+	</div>
+</body>
+</html>

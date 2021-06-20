@@ -6,7 +6,7 @@ window.addEventListener('load', ()=>{
      * @param {'on'|'off'} status
      * @param {string} date
     */
-    const createItem = (target, type, name, status, date)=>{
+    const createItem = (target, type, name, status, date, link)=>{
         let status_html = '';
 
         switch(status) {
@@ -31,7 +31,7 @@ window.addEventListener('load', ()=>{
             return `
                 <li class="item ${type}">
                     <div class="task">
-                    <div class="icon"> </div>
+                    <a href=${link}><div class="icon"> </div></a>
                     <div class="name" style="width:150px"> ${name} </div>
                     </div>
         
@@ -61,13 +61,6 @@ window.addEventListener('load', ()=>{
         target.appendChild(createElementFromHTML(html_string))
     }
 
-    const item_container = document.getElementById('BoardContainer');
-    const item1 = createItem(item_container, "type1", "테스트", "on", "2021-06-20");
-    // const item2
-    // const item3
-    // const imte4
-    // const item5
-
     // Helpers
     function createElementFromHTML(htmlString) {
         var div = document.createElement('div');
@@ -75,5 +68,16 @@ window.addEventListener('load', ()=>{
     
         // Change this to div.childNodes to support multiple top-level nodes
         return div.firstChild; 
+    }
+
+    // Main Process...
+    const item_container = document.getElementById('BoardContainer');
+    const url = window.location.pathname
+
+    if(/\/admin\/user\/dashboard/.test(url)){
+        const item1 = createItem(item_container, "type1", "사용자1", "on", "2021-06-20", '#');
+    }
+    else if(/\/admin\/container\/dashboard/.test(url)){
+        const item1 = createItem(item_container, "type1", "사용자1", "on", "2021-06-20", '#');
     }
 })

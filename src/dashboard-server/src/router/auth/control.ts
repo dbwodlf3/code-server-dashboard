@@ -2,11 +2,11 @@
  */
 
 import passport from "passport";
-import { ControlFunction, ControlResult, Middleware } from "lib/interface";
+import { ControlFunction, ControlResult, Middleware, ViewFunction } from "lib/interface";
 import { checkUser } from "lib/auth";
 import { defaultErrorHandler } from "lib/error_handler";
 
- export const login: Middleware = function(req, res, next) {
+export const login: Middleware = function(req, res, next) {
     
     const response_msg: ControlResult = {
         "fail": false,
@@ -26,7 +26,8 @@ import { defaultErrorHandler } from "lib/error_handler";
                     response_msg.msg = err;
                 } else {
                     response_msg.msg = "succed to login"
-                    return res.json(response_msg);
+                    res.redirect('/');
+                    // return res.json(response_msg);
                 }
             });
         })
@@ -43,4 +44,9 @@ import { defaultErrorHandler } from "lib/error_handler";
     })(req, res, next);
     
     return response_msg;
+}
+
+export const logout: ViewFunction = function(req, res) {
+    req.logOut();
+    res.redirect('/')
 }

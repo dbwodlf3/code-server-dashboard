@@ -5,8 +5,7 @@ import * as control from './control'
 
 const router = Router();
 
-router.get('/admin/user/dashboard', checkLogin, view.getDashBoardPage);
-router.get('/admin/user/create', checkLogin, view.getCreatePage);
-router.get('/admin/user/:id', checkLogin, urlencoded(), control.login);
+import containerRouter from './container/router'; router.use(containerRouter);
+import userRouter from './user/router'; router.use(userRouter);
 
 export default router;

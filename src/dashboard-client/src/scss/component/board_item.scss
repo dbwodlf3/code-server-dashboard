@@ -38,214 +38,215 @@ $col4Width: 150px;
 $col5Width: 170px;
 $col6Width: 30px;
 
-
-body {
+.board-container{
 	font-family: "Open Sans", sans-serif;
 	background: $colorLightGrey;
-}
+	height: 100%;
 
-.container {
-	margin: 0 auto;
-	margin-top: 50px;
-	width: $layoutWidth;
-}
-
-header {
-	display: flex;
-	align-items: center;	
-	font-size: $sizeDefault;
-	font-weight: 600;
-	color: $colorGrey;
-	padding: $standardPadding;
-	box-sizing: border-box;
-	user-select: none;
-	text-align: center;
-	
-	.button-col {
-		width: $col1Width;
-		text-align: left;
+	.container {
+		margin: 0 auto;
+		margin-top: 50px;
+		width: $layoutWidth;
 	}
 
-	.status-col {
-		width: $col2Width
-	}
-
-	.progress-col {
-		width: $col3Width
-	}
-
-	.dates-col {
-		width: $col4Width
-	}
-
-	.priority-col {
-		width: $col5Width
-	}
-	
-	.icon-col {
-		width: $col6Width;
-		text-align: right;
-	}
-
-	button {
-		color: $colorGrey;
-		outline: none;
-		border: none;
-		background: darken($colorLightGrey, 10%);
-		padding: $standardPadding/2 $standardPadding;
-		border-radius: $layoutBorderRadius/2;
-		margin-right: $standardPadding;
+	header {
+		display: flex;
+		align-items: center;	
 		font-size: $sizeDefault;
 		font-weight: 600;
-
-		&:hover {
-			cursor: pointer;
-			background: lighten($colorDark, 10%);
-		}
-	}
-
-	label {
-		display: inline-block;
-		margin: 0 $standardPadding;
-		text-align: center;
-	}
-
-	.icon-col {
-		padding-right: 20px;
-	}
-}
-
-ul.task-items {
-	li.item {
-		display: flex;
-		align-items: center;		
-		margin: $standardPadding 0;
+		color: $colorGrey;
 		padding: $standardPadding;
-		background: $colorWhite;
-		border-radius: $layoutBorderRadius;
-		box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
-
-		&.type1 .task {
-			.icon {
-				background: $color1;
-			}
-		}
+		box-sizing: border-box;
+		user-select: none;
+		text-align: center;
 		
-		&.type2 .task {
-			.icon {
-				background: $color2;
-			}
-		}
-		
-		&.type3 .task {
-			.icon {
-				background: $color3;
-			}
-		}
-		
-		&.type4 .task {
-			.icon {
-				background: $color4;
-			}
-		}
-
-		.task {
-			display: flex;
-			align-items: center;
+		.button-col {
 			width: $col1Width;
-
-			.icon {
-				background: $colorGrey;
-				width: 50px;
-				height: 50px;
-				border-radius: $layoutBorderRadius;
-			}
-
-			.name {
-				background: $colorLightGrey;
-				margin-left: $standardPadding;
-				width: 180px;
-				height: 25px;
-				border-radius: $layoutBorderRadius * 3;
-			}
+			text-align: left;
 		}
 
-		.status {
-			display: flex;
-			align-items: center;
-			font-size: $sizeDefault;
-			color: $colorDarkGreen;
-			width: $col2Width;
-			margin-left: $standardPadding*1.5;
-			
-			.icon {
-				background: $colorDarkGreen;
-				margin-right: $standardPadding/2;
-				width: 14px;
-				height: 14px;
-				border-radius: 50%;
-				
-				&.risk {
-					background: red;	
-				}
-				
-				&.warning {
-					background: $colorWarning;	
-				}
-				
-				&.off {
-					background: $colorOff;	
-				}
-			}
+		.status-col {
+			width: $col2Width
 		}
 
-		.progress {
-			width: $col3Width;
-			progress {
-				display: block;
-				margin-left: 0;
-				-webkit-appearance: none;
-				height: 12.5px;
-				width: $col3Width * 0.75;
-			}
-
-			progress::-webkit-progress-bar {
-				background-color: $colorLightGrey;
-				border-radius: 5px;
-			}
-
-			::-webkit-progress-value {
-				background-color: $colorLightGreen;
-				border-radius: 5px;
-			}
+		.progress-col {
+			width: $col3Width
 		}
 
-		.dates {
-			width: $col4Width;
+		.dates-col {
+			width: $col4Width
 		}
 
-		.dates,
-		.priority {
-			.bar {
-				background: $colorLightGrey;				
-				width: 100px;
-				height: 25px;
-				border-radius: $layoutBorderRadius * 3;
-			}
+		.priority-col {
+			width: $col5Width
 		}
-
-		.priority {
-			width: $col5Width*0.85;
-			.bar {
-				background: #ffcdd2;
-			}
-		}
-
-		.user {
+		
+		.icon-col {
 			width: $col6Width;
-			img {
-				border-radius: 50%;
+			text-align: right;
+		}
+
+		button {
+			color: $colorGrey;
+			outline: none;
+			border: none;
+			background: darken($colorLightGrey, 10%);
+			padding: $standardPadding/2 $standardPadding;
+			border-radius: $layoutBorderRadius/2;
+			margin-right: $standardPadding;
+			font-size: $sizeDefault;
+			font-weight: 600;
+
+			&:hover {
+				cursor: pointer;
+				background: lighten($colorDark, 10%);
+			}
+		}
+
+		label {
+			display: inline-block;
+			margin: 0 $standardPadding;
+			text-align: center;
+		}
+
+		.icon-col {
+			padding-right: 20px;
+		}
+	}
+
+	ul.task-items {
+		li.item {
+			display: flex;
+			align-items: center;		
+			margin: $standardPadding 0;
+			padding: $standardPadding;
+			background: $colorWhite;
+			border-radius: $layoutBorderRadius;
+			box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+
+			&.type1 .task {
+				.icon {
+					background: $color1;
+				}
+			}
+			
+			&.type2 .task {
+				.icon {
+					background: $color2;
+				}
+			}
+			
+			&.type3 .task {
+				.icon {
+					background: $color3;
+				}
+			}
+			
+			&.type4 .task {
+				.icon {
+					background: $color4;
+				}
+			}
+
+			.task {
+				display: flex;
+				align-items: center;
+				width: $col1Width;
+
+				.icon {
+					background: $colorGrey;
+					width: 50px;
+					height: 50px;
+					border-radius: $layoutBorderRadius;
+				}
+
+				.name {
+					background: $colorLightGrey;
+					margin-left: $standardPadding;
+					width: 180px;
+					height: 25px;
+					border-radius: $layoutBorderRadius * 3;
+				}
+			}
+
+			.status {
+				display: flex;
+				align-items: center;
+				font-size: $sizeDefault;
+				color: $colorDarkGreen;
+				width: $col2Width;
+				margin-left: $standardPadding*1.5;
+				
+				.icon {
+					background: $colorDarkGreen;
+					margin-right: $standardPadding/2;
+					width: 14px;
+					height: 14px;
+					border-radius: 50%;
+					
+					&.risk {
+						background: red;	
+					}
+					
+					&.warning {
+						background: $colorWarning;	
+					}
+					
+					&.off {
+						background: $colorOff;	
+					}
+				}
+			}
+
+			.progress {
+				width: $col3Width;
+				progress {
+					display: block;
+					margin-left: 0;
+					-webkit-appearance: none;
+					height: 12.5px;
+					width: $col3Width * 0.75;
+				}
+
+				progress::-webkit-progress-bar {
+					background-color: $colorLightGrey;
+					border-radius: 5px;
+				}
+
+				::-webkit-progress-value {
+					background-color: $colorLightGreen;
+					border-radius: 5px;
+				}
+			}
+
+			.dates {
+				width: $col4Width;
+			}
+
+			.dates,
+			.priority {
+				.bar {
+					background: $colorLightGrey;				
+					width: 100px;
+					height: 25px;
+					border-radius: $layoutBorderRadius * 3;
+				}
+			}
+
+			.priority {
+				width: $col5Width*0.85;
+				.bar {
+					background: #ffcdd2;
+				}
+			}
+
+			.user {
+				width: $col6Width;
+				img {
+					border-radius: 50%;
+				}
 			}
 		}
 	}
+
 }
