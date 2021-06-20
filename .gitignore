@@ -11,3 +11,4 @@ user.css
 typedocs
 docs
 out
+docker/web/location/*.conf

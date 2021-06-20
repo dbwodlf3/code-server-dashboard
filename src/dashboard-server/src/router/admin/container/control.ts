@@ -7,6 +7,7 @@ import { defaultErrorHandler } from "lib/error_handler";
 import db from "lib/db";
 
 import * as exec from 'child_process';
+import { createCodeServerContainer } from "script/add_workspace";
 
 export const createContainer: ControlFunction = function(req, res) {
     
@@ -14,6 +15,7 @@ export const createContainer: ControlFunction = function(req, res) {
         "fail": false,
         "msg": ""
     }
+    const userId = req.user!.id;
     const name = req.body['name'];    
     const passwd = req.body['passwd'];
     const publishedPort = req.body['port'];
@@ -27,21 +29,7 @@ export const createContainer: ControlFunction = function(req, res) {
 
     db.query(query).then((result)=>{
         const insertedId = result['insertId'];
-        
-        /** Create Code Server and Update. */
-        let command = `docker service create --name ${name} --publish published=${publishedPort},target=8080 -d docker_cs`
-        exec.exec(command, (err, stdout, stderr)=>{
-
-            // get id
-            let command = `docker service ls -f name=${name} | grep -w ${name} | awk '{print $1; exit}'`
-            exec.exec(command, (err, stdout, stderr)=>{
-                const serviceId = stdout;
-
-                let query = `UPDATE SET serviceId=${serviceId} WHERE id=${insertedId}`;
-                db.query(query);
-            })
-        })
-
+        createCodeServerContainer(insertedId, userId, name, passwd, publishedPort);
     })
     .catch((err)=>{
         console.log(err);

@@ -6,6 +6,8 @@
  const projectDir = (()=>{
      return path.join(__dirname, "..", "..", "..", "..")
  })();
+
+ const locationDir = path.join(projectDir, "docker", "web", "location")
  
  const staticDir = path.join(projectDir, "static")
 
@@ -14,6 +16,7 @@
  export default { 
      projectDir: projectDir,
      staticDir: staticDir,
+     locationDir: locationDir,
      shaKey: shaKey,
      dbHost: 'localhost',
      dbUser: 'root',

@@ -7,6 +7,7 @@ const router = Router();
 
 router.get('/admin/container/dashboard', checkLogin, view.getDashBoardPage);
 router.get('/admin/container/create', checkLogin, urlencoded(), view.getCreatePage);
+router.post('/admin/container/create', checkLogin, urlencoded(), control.createContainer)
 router.get('/admin/container/:id', checkLogin, urlencoded(), view.getDetailPage);
 
 export default router;
