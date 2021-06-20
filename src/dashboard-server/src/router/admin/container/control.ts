@@ -40,4 +40,23 @@ export const createContainer: ControlFunction = function(req, res) {
     return response_msg;
 }
 
+export const getContainers: ControlFunction = function(req, res) {    
+    const response_msg: ControlResult = {
+        "fail": false,
+        "msg": ""
+    }
+    
+    let query = `SELECT * FROM Workspace`;
+
+    db.query(query).then((result)=>{
+        res.json(result);
+    })
+    .catch((err)=>{
+        console.log(err);
+    });
+    
+    return response_msg;
+}
+
+
 // Helper
