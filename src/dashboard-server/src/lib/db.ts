@@ -1,12 +1,20 @@
 import mariadb from 'mariadb';
 import common from './common';
 
+let dbHost = common.dbHost;
+let dbPort = 3333;
+
+if ((process.env['NODE_ENV'] == 'production')) {
+    dbHost = 'db';    
+    dbPort = 3306;
+}
+
 export const pool = mariadb.createPool({
-    "host": common.dbHost,
+    "host": dbHost,
     "user": common.dbUser,
     "password": common.dbPasswd,
     "database": common.dbDatabase,
-    "port": 3333
+    "port": dbPort
 });
 
 
