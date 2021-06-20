@@ -74,6 +74,11 @@ passport.deserializeUser( (user: User, cb)=>{
     cb(null, user);
 });
 
+/** Static Files*/
+app.use('/static/css', express.static(path.join(common.projectDir, 'static', 'css')));
+app.use('/static/js', express.static(path.join(common.projectDir, 'static', 'js')));
+app.use('/static/assets', express.static(path.join(common.projectDir, 'static', 'assets')));
+
 /** Routers */
 import entryRouter from './router/router'
 app.use(entryRouter);

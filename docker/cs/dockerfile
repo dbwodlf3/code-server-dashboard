@@ -11,10 +11,14 @@ RUN apt-get update -y -qq
 # Instal basic tools
 RUN apt-get install -y -qq curl
 RUN apt-get install -y -qq net-tools
-RUN apt-get install -y iproute2
+RUN apt-get install -y -qq iproute2
 RUN apt-get install -y -qq openssh-server
 
+# Install Node.js
+RUN apt-get install -y -qq node.js
+RUN apt-get install -y -qq npm
+
 # Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 EXPOSE 22
