@@ -83,6 +83,6 @@ app.use('/static/assets', express.static(path.join(common.projectDir, 'static', 
 import entryRouter from './router/router'
 app.use(entryRouter);
 
-app.listen(8080, ()=>{
+app.listen(80, ()=>{
     console.log(`Dashboard Server is listening at 8080 port.`)
 })
