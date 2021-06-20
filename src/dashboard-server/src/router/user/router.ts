@@ -6,5 +6,6 @@ import * as control from './control'
 const router = Router();
 
 router.get('/user/dashboard', checkLogin, view.getDashBoardPage);
+router.get('/user/container', checkLogin, view.getContainerBoardPage);
 
 export default router;

@@ -7,3 +7,9 @@ export const getDashBoardPage: interfaces.ViewFunction = function (req, res) {
     res.render('user/dashboard.njk');
     return;
 };
+
+
+export const getContainerBoardPage: interfaces.ViewFunction = function (req, res) {
+    res.render('user/container.njk');
+    return;
+};

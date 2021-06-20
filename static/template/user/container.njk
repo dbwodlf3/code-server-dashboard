@@ -1,0 +1,45 @@
+<html>
+<body>
+  {% include "common/global_nav.njk" %}
+
+  <div>
+<section class="container">
+
+  <!-- Header Bar -->
+  <header>
+    <div class="button-col">
+      <button class="btn" name="Add Task"> Add Task </button>
+    </div>
+
+    <div class="status-col">
+      <label> Status </label>
+    </div>
+
+    <div class="progress-col">
+      <label> Progress </label>
+    </div>
+    
+    <div class="dates-col">
+      <label> Dates </label>
+    </div>
+
+    <div class="priority-col">
+      <label> Priority </label>
+    </div>
+    
+    <div class="icon-col">
+      <i class="icon fa fa-user-o"> </i>
+    </div>
+
+  </header>
+  <!-- List Items -->
+  <ul id="BoardContainer" class="task-items">
+  </ul>
+
+</section>
+  </div>
+</body>
+
+<script src="{{static}}/js/board_item.js"></script>
+</html>
+
