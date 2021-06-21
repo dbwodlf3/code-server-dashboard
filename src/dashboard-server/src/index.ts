@@ -20,7 +20,7 @@ import livereloadMiddleware from 'connect-livereload'
 import common from 'lib/common'
 
 /** livereload */
-if(true) {
+if ((process.env['NODE_ENV'] != 'production')) {
     const liverServer = livereload.createServer({
         exts: ['html', 'css', 'njk', 'js'],
         debug: true

@@ -26,6 +26,7 @@ let command = `docker service create --name ${containerName} -d docker_cs --publ
 export function createCodeServerContainer(insertedId: number, userId: number, containerName: string, password: string, publishedPort: number){
     // EXMAPELS
     // docker service create --name code-user1 -d --publish published=2454,target=8080 docker_cs
+    
     let command = `docker run --name ${containerName} -p ${publishedPort}:8080 -d docker_cs`
 
     // add service
@@ -34,9 +35,13 @@ export function createCodeServerContainer(insertedId: number, userId: number, co
         let command = `docker ps -f name=${containerName} | grep -w ${containerName} | awk '{print $1; exit}'`
         exec.exec(command, (err, stdout, stderr)=>{
             const id = stdout;
+            console.log(err);
+            console.log(stdout);
+            console.log(stderr);
 
             console.log(id);
         })
+
     })
 
     exec.exec(command, (err, stdout, stderr)=>{
@@ -59,7 +64,12 @@ export function createCodeServerContainer(insertedId: number, userId: number, co
         // })
         // Temporary...
         const file_name = `code-server.${publishedPort}.conf`
-        const full_path = path.join(common.locationDir, file_name)
+        let full_path = path.join(common.locationDir, file_name)
+
+        if ((process.env['NODE_ENV'] == 'production')) {
+            full_path = path.join('/etc/nginx/sites-available/location', file_name);
+        }
+
         fs.writeFile(full_path, confgiure_file, (err)=>{
             console.log('it works?');
             if(err) {

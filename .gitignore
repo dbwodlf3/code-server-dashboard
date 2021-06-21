@@ -12,3 +12,6 @@ typedocs
 docs
 out
 docker/web/location/*.conf
+sercrets.txt
+ssl
+all.css
